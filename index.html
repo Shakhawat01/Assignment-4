@@ -29,7 +29,29 @@
     </style>
   </head>
   <body class="bg-[#F8FAFC] min-h-screen">
-    
+    <header class="w-10/12 mx-auto pt-8">
+      <h2 class="text-3xl font-bold text-[#002C5C] mb-5">
+        Job Application Tracker
+      </h2>
+      <div class="grid grid-cols-3 gap-4">
+        <div class="bg-white p-5 rounded-lg stroke-[#F1F2F4]">
+          <p class="text-[14px] font-medium text-[#323B49]">Total</p>
+          <p id="totalCount" class="text-[#002C5C] font-bold text-2xl">0</p>
+        </div>
+
+        <div class="bg-white p-5 rounded-lg stroke-[#F1F2F4]">
+          <p class="text-[14px] font-medium text-[#323B49]">Interview</p>
+          <p id="interviewCount" class="text-[#10B981] font-bold text-2xl">0</p>
+        </div>
+
+        <div class="bg-white p-5 rounded-lg stroke-[#F1F2F4]">
+          <p class="text-[14px] font-medium text-[#323B49]">Rejected</p>
+          <p id="rejectedCount" class="text-[#EF4444] font-bold text-2xl">0</p>
+        </div>
+      </div>
+    </header>
+
+    <hr class="w-10/12 mx-auto my-8 border-0 border-t border-[#E6E7E9]" />
 
     <script src="./script/app.js"></script>
   </body>
