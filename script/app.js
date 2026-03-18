@@ -21,8 +21,15 @@ function calculateTotal() {
   jobs.innerText = allCardsSection.children.length;
   interviewCount.innerText = interviewList.length;
   rejectedCount.innerText = rejectedList.length;
+  if (currentStatus === "all-filter-btn") {
+    jobs.innerText = allCardsSection.children.length;
+  } else if (currentStatus === "interview-filter-btn") {
+    jobs.innerText = interviewList.length;
+  } else if (currentStatus === "rejected-filter-btn") {
+    jobs.innerText = rejectedList.length;
+  }
 }
-calculateTotal();
+calculateTotal(); 
 function toggleStyle(id) {
   allFilterBtn.classList.remove("btn-primary");
   interviewFilterBtn.classList.remove("btn-primary");
@@ -182,8 +189,6 @@ mainContainer.addEventListener("click", function (event) {
       renderRejected();
     }
     calculateTotal();
-    jobs.innerText = interviewList.length;
-    jobs.innerText = rejectedList.length;
   }
 });
 
