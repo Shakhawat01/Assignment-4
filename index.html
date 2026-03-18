@@ -36,44 +36,52 @@
       <div class="grid grid-cols-3 gap-4">
         <div class="bg-white p-5 rounded-lg stroke-[#F1F2F4]">
           <p class="text-[14px] font-medium text-[#323B49]">Total</p>
-          <p id="totalCount" class="text-[#002C5C] font-bold text-2xl">0</p>
+          <p id="total-count" class="text-[#002C5C] font-bold text-2xl">0</p>
         </div>
 
         <div class="bg-white p-5 rounded-lg stroke-[#F1F2F4]">
           <p class="text-[14px] font-medium text-[#323B49]">Interview</p>
-          <p id="interviewCount" class="text-[#10B981] font-bold text-2xl">0</p>
+          <p id="interview-count" class="text-[#10B981] font-bold text-2xl">0</p>
         </div>
 
         <div class="bg-white p-5 rounded-lg stroke-[#F1F2F4]">
           <p class="text-[14px] font-medium text-[#323B49]">Rejected</p>
-          <p id="rejectedCount" class="text-[#EF4444] font-bold text-2xl">0</p>
+          <p id="rejected-count" class="text-[#EF4444] font-bold text-2xl">0</p>
         </div>
       </div>
     </header>
 
     <hr class="w-10/12 mx-auto my-8 border-0 border-t border-[#E6E7E9]" />
 
-    <main class="w-10/12 mx-auto">
+    <main class="w-10/12 mx-auto pb-8">
       <div>
         <div class="flex justify-between">
           <h2 class="text-xl font-semibold text-[#002C5C]">Available Jobs</h2>
           <!-- work pending for last -->
-          <p class="font-medium text-[#64748B]">8 jobs</p>
+          <p class="font-medium text-[#64748B]"><span id="jobs">0</span> jobs</p>
         </div>
 
         <div class="mt-6">
-          <button id="all-filter-btn" class="btn btn-primary w-20 mr-2">
+          <button onclick="toggleStyle('all-filter-btn')" id="all-filter-btn" class="btn btn-primary w-20 mr-2">
             All
           </button>
-          <button id="interview-filter-btn" class="btn bg-base-200 w-20 mr-2">
+          <button onclick="toggleStyle('interview-filter-btn')" id="interview-filter-btn" class="btn bg-base-200 w-20 mr-2">
             Interview
           </button>
-          <button id="rejected-filter-btn" class="btn bg-base-200 w-20">
+          <button onclick="toggleStyle('rejected-filter-btn')" id="rejected-filter-btn" class="btn bg-base-200 w-20">
             Rejected
           </button>
         </div>
 
-        <section class="allCards space-y-4">
+        <section id="filtered-section" class="hidden">
+            <div class="grid justify-items-center mt-4 bg-white border border-gray-200 shadow-[#F1F2F4] rounded-lg p-23">
+                <img src="./assets/jobs.png" alt="">
+                <h2 class="mt-3 text-2xl font-semibold text-[#002C5C]">No jobs available</h2>
+                <p class="text-[#64748B]">Check back soon for new job opportunities</p>
+            </div>
+        </section>
+
+        <section id="allCards" class=" space-y-4">
           <div
             class="card flex flex-row justify-between mt-4 bg-white border border-gray-200 shadow-[#F1F2F4] rounded-lg p-6"
           >
@@ -105,12 +113,12 @@
               </p>
               <div class="flex gap-4">
                 <button
-                  class="interview-btn btn bg-green-300 px-4 py-1 rounded cursor-pointer"
+                  class="interview-btn btn btn-success btn-soft border-2 border-success px-4 py-1 rounded cursor-pointer"
                 >
                   INTERVIEW
                 </button>
                 <button
-                  class="rejected-btn btn bg-red-300 px-3 py-1 rounded cursor-pointer"
+                  class="rejected-btn btn btn-error btn-soft border-2 border-error px-3 py-1 rounded cursor-pointer"
                 >
                   REJECTED
                 </button>
@@ -159,12 +167,12 @@
               </p>
               <div class="flex gap-4">
                 <button
-                  class="interview-btn btn bg-green-300 px-4 py-1 rounded cursor-pointer"
+                  class="interview-btn btn btn-success btn-soft border-2 border-success px-4 py-1 rounded cursor-pointer"
                 >
                   INTERVIEW
                 </button>
                 <button
-                  class="rejected-btn btn bg-red-300 px-3 py-1 rounded cursor-pointer"
+                  class="rejected-btn btn btn-error btn-soft border-2 border-error px-3 py-1 rounded cursor-pointer"
                 >
                   REJECTED
                 </button>
@@ -214,12 +222,12 @@
               </p>
               <div class="flex gap-4">
                 <button
-                  class="interview-btn btn bg-green-300 px-4 py-1 rounded cursor-pointer"
+                  class="interview-btn btn btn-success btn-soft border-2 border-success px-4 py-1 rounded cursor-pointer"
                 >
                   INTERVIEW
                 </button>
                 <button
-                  class="rejected-btn btn bg-red-300 px-3 py-1 rounded cursor-pointer"
+                  class="rejected-btn btn btn-error btn-soft border-2 border-error px-3 py-1 rounded cursor-pointer"
                 >
                   REJECTED
                 </button>
@@ -266,12 +274,12 @@
               </p>
               <div class="flex gap-4">
                 <button
-                  class="interview-btn btn bg-green-300 px-4 py-1 rounded cursor-pointer"
+                  class="interview-btn btn btn-success btn-soft border-2 border-success px-4 py-1 rounded cursor-pointer"
                 >
                   INTERVIEW
                 </button>
                 <button
-                  class="rejected-btn btn bg-red-300 px-3 py-1 rounded cursor-pointer"
+                  class="rejected-btn btn btn-error btn-soft border-2 border-error px-3 py-1 rounded cursor-pointer"
                 >
                   REJECTED
                 </button>
@@ -319,12 +327,12 @@
               </p>
               <div class="flex gap-4">
                 <button
-                  class="interview-btn btn bg-green-300 px-4 py-1 rounded cursor-pointer"
+                  class="interview-btn btn btn-success btn-soft border-2 border-success px-4 py-1 rounded cursor-pointer"
                 >
                   INTERVIEW
                 </button>
                 <button
-                  class="rejected-btn btn bg-red-300 px-3 py-1 rounded cursor-pointer"
+                  class="rejected-btn btn btn-error btn-soft border-2 border-error px-3 py-1 rounded cursor-pointer"
                 >
                   REJECTED
                 </button>
@@ -371,12 +379,12 @@
               </p>
               <div class="flex gap-4">
                 <button
-                  class="interview-btn btn bg-green-300 px-4 py-1 rounded cursor-pointer"
+                  class="interview-btn btn btn-success btn-soft border-2 border-success px-4 py-1 rounded cursor-pointer"
                 >
                   INTERVIEW
                 </button>
                 <button
-                  class="rejected-btn btn bg-red-300 px-3 py-1 rounded cursor-pointer"
+                  class="rejected-btn btn btn-error btn-soft border-2 border-error px-3 py-1 rounded cursor-pointer"
                 >
                   REJECTED
                 </button>
@@ -424,12 +432,12 @@
               </p>
               <div class="flex gap-4">
                 <button
-                  class="interview-btn btn bg-green-300 px-4 py-1 rounded cursor-pointer"
+                  class="interview-btn btn btn-success btn-soft border-2 border-success px-4 py-1 rounded cursor-pointer"
                 >
                   INTERVIEW
                 </button>
                 <button
-                  class="rejected-btn btn bg-red-300 px-3 py-1 rounded cursor-pointer"
+                  class="rejected-btn btn btn-error btn-soft border-2 border-error px-3 py-1 rounded cursor-pointer"
                 >
                   REJECTED
                 </button>
@@ -479,12 +487,12 @@
               </p>
               <div class="flex gap-4">
                 <button
-                  class="interview-btn btn bg-green-300 px-4 py-1 rounded cursor-pointer"
+                  class="interview-btn btn btn-success btn-soft border-2 border-success px-4 py-1 rounded cursor-pointer"
                 >
                   INTERVIEW
                 </button>
                 <button
-                  class="rejected-btn btn bg-red-300 px-3 py-1 rounded cursor-pointer"
+                  class="rejected-btn btn btn-error btn-soft border-2 border-error px-3 py-1 rounded cursor-pointer"
                 >
                   REJECTED
                 </button>
