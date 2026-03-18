@@ -131,3 +131,61 @@ mainContainer.addEventListener("click", function (event) {
     calculateTotal();
   }
 });
+
+function renderInterviews() {
+  filteredSection.innerHTML = "";
+  for (let interview of interviewList) {
+    const div = document.createElement("div");
+    div.className =
+      "card flex flex-row justify-between mt-4 bg-white border border-gray-200 shadow-[#F1F2F4] rounded-lg p-6";
+    div.innerHTML = `
+        <div class="space-y-4">
+              <div class="">
+                <p class="companyName text-lg font-semibold text-[#002C5C]">
+                  ${interview.companyName}
+                </p>
+                <p class="position text-[#64748B]">${interview.position}</p>
+              </div>
+
+              <div class="flex items-center gap-4">
+                <p class="location text-[14px] text-[#64748B]">${interview.location}</p>
+                <span class="text-[#64748B]">•</span>
+                <p class="type text-[14px] text-[#64748B]">${interview.type}</p>
+                <span class="text-[#64748B]">•</span>
+                <p class="salary text-[14px] text-[#64748B]">
+                  ${interview.salary}
+                </p>
+              </div>
+
+              <span
+                class="status1 px-3 py-2 rounded-sm text-[14px] font-medium text-[#002C5C] bg-[#EEF4FF]"
+                >${interview.status1}</span
+              >
+              <p class="description text-[14px] text-[#323B49] mt-4">
+                ${interview.description}
+              </p>
+              <div class="flex gap-4">
+                <button
+                  class="interview-btn btn btn-success btn-soft border-2 border-success px-4 py-1 rounded cursor-pointer"
+                >
+                  INTERVIEW
+                </button>
+                <button
+                  class="rejected-btn btn btn-error btn-soft border-2 border-error px-3 py-1 rounded cursor-pointer"
+                >
+                  REJECTED
+                </button>
+              </div>
+            </div>
+
+            <div class="">
+              <button
+                class="btn-delete h-8 w-8 stroke-[#F1F2F4] border border-base-300 cursor-pointer rounded-full"
+              >
+                <img class="mx-auto" src="./assets/Trash.png" alt="" />
+              </button>
+            </div>
+        `;
+    filteredSection.appendChild(div);
+  }
+}
