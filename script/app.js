@@ -49,3 +49,85 @@ function toggleStyle(id) {
     renderRejected();
   }
 }
+
+mainContainer.addEventListener("click", function (event) {
+  if (event.target.classList.contains("interview-btn")) {
+    const parentNode = event.target.parentNode.parentNode;
+    console.log(parentNode);
+    const companyName = parentNode.querySelector(".companyName").innerText;
+    const position = parentNode.querySelector(".position").innerText;
+    const location = parentNode.querySelector(".location").innerText;
+    const type = parentNode.querySelector(".type").innerText;
+    const salary = parentNode.querySelector(".salary").innerText;
+    const status1 = parentNode.querySelector(".status1").innerText;
+    const description = parentNode.querySelector(".description").innerText;
+    parentNode.querySelector(".status1").innerText = "INTERVIEW";
+
+    let cardInfo = {
+      companyName,
+      position,
+      location,
+      type,
+      salary,
+      status1: "INTERVIEW",
+      description,
+    };
+    // console.log(cardInfo)
+    const planExits = interviewList.find(
+      (item) => item.companyName === cardInfo.companyName,
+    );
+
+    if (!planExits) {
+      interviewList.push(cardInfo);
+    }
+
+    rejectedList = rejectedList.filter(
+      (item) => item.companyName != cardInfo.companyName,
+    );
+
+    calculateTotal();
+
+    if (currentStatus === "rejected-filter-btn") {
+      renderRejected();
+    }
+  } else if (event.target.classList.contains("rejected-btn")) {
+    const parentNode = event.target.parentNode.parentNode;
+    console.log(parentNode);
+    const companyName = parentNode.querySelector(".companyName").innerText;
+    const position = parentNode.querySelector(".position").innerText;
+    const location = parentNode.querySelector(".location").innerText;
+    const type = parentNode.querySelector(".type").innerText;
+    const salary = parentNode.querySelector(".salary").innerText;
+    const status1 = parentNode.querySelector(".status1").innerText;
+    const description = parentNode.querySelector(".description").innerText;
+    parentNode.querySelector(".status1").innerText = "REJECTED";
+
+    let cardInfo = {
+      companyName,
+      position,
+      location,
+      type,
+      salary,
+      status1: "REJECTED",
+      description,
+    };
+    // console.log(cardInfo)
+    const planExits = rejectedList.find(
+      (item) => item.companyName === cardInfo.companyName,
+    );
+
+    if (!planExits) {
+      rejectedList.push(cardInfo);
+    }
+
+    interviewList = interviewList.filter(
+      (item) => item.companyName !== cardInfo.companyName,
+    );
+
+    if (currentStatus === "interview-filter-btn") {
+      renderInterviews();
+    }
+
+    calculateTotal();
+  }
+});
