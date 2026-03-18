@@ -1,6 +1,6 @@
 let interviewList = [];
 let rejectedList = [];
-let currentStatus = "all";
+let currentStatus = "all-filter-btn";
 
 let totalCount = document.getElementById("total-count");
 let interviewCount = document.getElementById("interview-count");
@@ -37,13 +37,16 @@ function toggleStyle(id) {
   currentStatus = id;
 
   if (id === "interview-filter-btn") {
+    jobs.innerText = interviewList.length;
     allCardsSection.classList.add("hidden");
     filteredSection.classList.remove("hidden");
     renderInterviews();
   } else if (id === "all-filter-btn") {
+    jobs.innerText = allCardsSection.children.length;
     allCardsSection.classList.remove("hidden");
     filteredSection.classList.add("hidden");
   } else if (id === "rejected-filter-btn") {
+    jobs.innerText = rejectedList.length;
     allCardsSection.classList.add("hidden");
     filteredSection.classList.remove("hidden");
     renderRejected();
@@ -53,7 +56,6 @@ function toggleStyle(id) {
 mainContainer.addEventListener("click", function (event) {
   if (event.target.classList.contains("interview-btn")) {
     const parentNode = event.target.parentNode.parentNode;
-    console.log(parentNode);
     const companyName = parentNode.querySelector(".companyName").innerText;
     const position = parentNode.querySelector(".position").innerText;
     const location = parentNode.querySelector(".location").innerText;
@@ -72,7 +74,7 @@ mainContainer.addEventListener("click", function (event) {
       status1: "INTERVIEW",
       description,
     };
-    // console.log(cardInfo)
+
     const planExits = interviewList.find(
       (item) => item.companyName === cardInfo.companyName,
     );
@@ -86,13 +88,12 @@ mainContainer.addEventListener("click", function (event) {
     );
 
     calculateTotal();
-
     if (currentStatus === "rejected-filter-btn") {
       renderRejected();
+      jobs.innerText = rejectedList.length;
     }
   } else if (event.target.classList.contains("rejected-btn")) {
     const parentNode = event.target.parentNode.parentNode;
-    console.log(parentNode);
     const companyName = parentNode.querySelector(".companyName").innerText;
     const position = parentNode.querySelector(".position").innerText;
     const location = parentNode.querySelector(".location").innerText;
@@ -111,7 +112,6 @@ mainContainer.addEventListener("click", function (event) {
       status1: "REJECTED",
       description,
     };
-    // console.log(cardInfo)
     const planExits = rejectedList.find(
       (item) => item.companyName === cardInfo.companyName,
     );
@@ -124,8 +124,41 @@ mainContainer.addEventListener("click", function (event) {
       (item) => item.companyName !== cardInfo.companyName,
     );
 
+    calculateTotal();
     if (currentStatus === "interview-filter-btn") {
       renderInterviews();
+      jobs.innerText = interviewList.length;
+    }
+  } else if (event.target.closest(".btn-delete")) {
+    const card = event.target.closest(".card");
+    const companyName = card.querySelector(".companyName").innerText;
+
+    const allCards = document.querySelectorAll(".card");
+
+    allCards.forEach((card) => {
+      const name = card.querySelector(".companyName").innerText;
+      if (name === companyName) {
+        card.remove();
+      }
+    });
+
+    if (currentStatus === "all-filter-btn") {
+      interviewList = interviewList.filter(
+        (item) => item.companyName !== companyName,
+      );
+      rejectedList = rejectedList.filter(
+        (item) => item.companyName !== companyName,
+      );
+    } else if (currentStatus === "interview-filter-btn") {
+      interviewList = interviewList.filter(
+        (item) => item.companyName !== companyName,
+      );
+      renderInterviews();
+    } else if (currentStatus === "rejected-filter-btn") {
+      rejectedList = rejectedList.filter(
+        (item) => item.companyName !== companyName,
+      );
+      renderRejected();
     }
 
     calculateTotal();
@@ -182,7 +215,7 @@ function renderInterviews() {
               <button
                 class="btn-delete h-8 w-8 stroke-[#F1F2F4] border border-base-300 cursor-pointer rounded-full"
               >
-                <img class="mx-auto" src="./assets/Trash.png" alt="" />
+                <i class="fa-regular fa-trash-can"></i>
               </button>
             </div>
         `;
@@ -240,7 +273,7 @@ function renderRejected() {
               <button
                 class="btn-delete h-8 w-8 stroke-[#F1F2F4] border border-base-300 cursor-pointer rounded-full"
               >
-                <img class="mx-auto" src="./assets/Trash.png" alt="" />
+                <i class="fa-regular fa-trash-can"></i>
               </button>
             </div>
         `;
